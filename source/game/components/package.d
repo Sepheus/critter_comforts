@@ -6,4 +6,6 @@ public {
     import game.components.controllable;
     import game.components.velocity;
     import game.components.audio;
+    import game.components.tracker;
+    import game.components.background;
 }

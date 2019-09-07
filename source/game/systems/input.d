@@ -11,8 +11,8 @@ class InputSystem : System {
             auto v = entity.component!Velocity();
             auto p = entity.component!Position();
             if(IsKeyPressed(KEY_RIGHT)) { p.startLerp(); v.velocity.x = 32.0f; }
-            else if(IsKeyPressed(KEY_LEFT)) { p.startLerp(); v.velocity.x = -32.0f; }
-            else if(IsKeyPressed(KEY_UP)) { p.startLerp(); v.velocity.y = -32.0f; }
+            //else if(IsKeyPressed(KEY_LEFT)) { p.startLerp(); v.velocity.x = -32.0f; }
+            if(IsKeyPressed(KEY_UP)) { p.startLerp(); v.velocity.y = -32.0f; }
             else if(IsKeyPressed(KEY_DOWN)) { p.startLerp(); v.velocity.y = 32.0f; }
             else { v.velocity = Vector2Zero(); }
 		}
