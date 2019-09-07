@@ -11,8 +11,8 @@ void main() {
 	auto engine = new Engine();
 	auto player = engine.entities.create();
 	auto oakRoom = engine.entities.create();
-	Entity[3] enemies;
-	foreach(ref e; enemies) {
+	Entity[3] patron;
+	foreach(ref e; patron) {
 		e = engine.entities.create();
 	}
 	InitAudioDevice();
@@ -25,20 +25,21 @@ void main() {
 	player.add(new Animation("assets/sprites/Mack5.png", Vector2(0.0f, 0.0f), 5, Vector2(64.0f, 64.0f)));
 	player.add(new Controllable());
 	player.add(new Velocity());
-	enemies[0].add(new Position(Vector2(32, 32)));
-	enemies[0].add(new Velocity(24.0f, 0.0));
-	enemies[0].add(new Animation("assets/sprites/Scavengers_SpriteSheet.png", Vector2(192.0f, 0.0f), 6));
-	enemies[0].add(new Tracker(Vector2(608.0f, 32.0f)));
+	
+	patron[0].add(new Position(Vector2(0, 200)));
+	patron[0].add(new Velocity(3.0f, 0.0));
+	patron[0].add(new Animation("assets/sprites/LadyHat.png", Vector2(0.0f, 0.0f), 1, Vector2(64.0f, 64.0f)));
+	patron[0].add(new Tracker([Vector2(162.0f, 200.0f), Vector2(162.0f, 70.0f), Vector2(280.0f, 70.0f), Vector2(280.0f, 420.0f), Vector2(576.0f, 420.0f)]));
 
-	enemies[1].add(new Position(Vector2(32, 224)));
-	enemies[1].add(new Velocity(24.0f, 0.0));
-	enemies[1].add(new Animation("assets/sprites/Scavengers_SpriteSheet.png", Vector2(192.0f, 0.0f), 6));
-	enemies[1].add(new Tracker(Vector2(608.0f, 224.0f)));
+	patron[1].add(new Position(Vector2(118, 16)));
+	patron[1].add(new Velocity(3.0f, 0.0));
+	patron[1].add(new Animation("assets/sprites/ServerTray.png", Vector2(0.0f, 0.0f), 1, Vector2(64.0f, 64.0f)));
+	patron[1].add(new Tracker([Vector2(120.0f, 16.0f), Vector2(120.0f, 18.0f), Vector2(400.0f, 18.0f), Vector2(400.0f, 100.0f), Vector2(576.0f, 100.0f)]));
 
-	enemies[2].add(new Position(Vector2(32, 416)));
-	enemies[2].add(new Velocity(24.0f, 0.0));
-	enemies[2].add(new Animation("assets/sprites/Scavengers_SpriteSheet.png", Vector2(192.0f, 0.0f), 6));
-	enemies[2].add(new Tracker(Vector2(608.0f, 415.0f)));
+	patron[2].add(new Position(Vector2(32, 416)));
+	patron[2].add(new Velocity(3.0f, 0.0));
+	patron[2].add(new Animation("assets/sprites/LadyHat.png", Vector2(0.0f, 0.0f), 1, Vector2(64.0f, 64.0f)));
+	patron[2].add(new Tracker([Vector2(120.0f, 416.0f), Vector2(120.0f, 410.0f), Vector2(448.0f, 410.0f), Vector2(448.0f, 0.0f)]));
 
 	engine.systems.add(new RenderSystem);
 	engine.systems.add(new MovementSystem);
@@ -47,6 +48,7 @@ void main() {
 	engine.systems.add(new InputSystem);
 	engine.systems.add(new AudioSystem);
 	engine.systems.configure();
+
 	while(!WindowShouldClose()) {
 		engine.systems.update!InputSystem(GetFrameTime());
 		engine.systems.update!AnimationSystem(GetFrameTime());

@@ -4,9 +4,10 @@ class MovementSystem : System {
     import raylib : Vector2, GetTime;
 	import game.components : Position;
     import game.components : Velocity;
+    import game.components : Controllable;
 	void configure(EventManager events) { }
 	void update(EntityManager entities, EventManager events, double dt) {
-		foreach(entity; entities.entities!(Position, Velocity)()) {
+		foreach(entity; entities.entities!(Position, Velocity, Controllable)()) {
 			auto p = entity.component!Position();
             auto v = entity.component!Velocity();
             import raymath : Vector2Lerp, Vector2Add, Vector2Scale, Vector2Zero;

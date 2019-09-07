@@ -3,23 +3,21 @@ module game.components.tracker;
 class Tracker {
     import raylib : Vector2, GetTime;
     import raymath : Vector2Zero;
+    Vector2[] positions;
     Vector2 position;
-    int frameCounter;
-    bool isLerping;
-    double timeStarted;
-    Vector2 startPos;
-    Vector2 endPos;
+    int calls;
+    bool reverse;
 
-    this(Vector2 position) {
-        this.position = position;
+    this(Vector2[] positions) {
+        import std.algorithm.mutation : reverse;
+        this.positions = positions ~ positions.dup.reverse;
+        this.position = positions[0];
     }
 
-    void startLerp() {
-        if(!isLerping) {
-            isLerping = true;
-            timeStarted = GetTime();
-            startPos = this.position;
-            endPos = Vector2Zero();
-        }
+    void next() {
+        if(positions.length >= 1) { this.positions = positions[1..$] ~ positions[0]; }
+        calls++;
+        if((calls % (positions.length / 2)) == 0) { calls = 0; reverse = !reverse; }
+        position = this.positions[0];
     }
 }
