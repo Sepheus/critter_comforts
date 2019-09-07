@@ -1,6 +1,6 @@
-module game.components.tracker;
+module game.components.pathing;
 
-class Tracker {
+class Pathing {
     import raylib : Vector2, GetTime;
     import raymath : Vector2Zero;
     Vector2[] positions;
