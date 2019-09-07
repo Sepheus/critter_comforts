@@ -1,0 +1,26 @@
+{
+	"authors": [
+		"Vat O'Coffee"
+	],
+	"copyright": "Copyright © 2019, Vat O'Coffee",
+	"dependencies": {
+		"raylib_d": "~>2.0.7",
+		"star-entity": "~>1.0.9"
+	},
+	"description": "Critter Comforts is a game about a mouse living in a tearoom back in 1907, based off of the Macintosh Tea Room in the V&A Dundee. The player, as the mouse, must gather food by stealing crumbs and dropped food from the floor, and returning it to his den, while keeping out of sight of the café patrons.",
+	"license": "proprietary",
+	"name": "critter_comforts",
+	"configurations": [
+		{
+		"name": "application",
+		"targetType": "executable",
+		"targetPath": "bin/win32/",
+		"platforms" : ["windows"],
+		"lflags": [
+			"/SUBSYSTEM:CONSOLE",
+			"/ENTRY:mainCRTStartup"
+		],
+		"libs" : ["lib/win32/raylib"]
+		}
+	]
+}

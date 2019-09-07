@@ -1,0 +1,17 @@
+.dub
+docs.json
+__dummy.html
+docs/
+bin/
+/critter_comforts
+critter_comforts.so
+critter_comforts.dylib
+critter_comforts.dll
+critter_comforts.a
+critter_comforts.lib
+critter_comforts-test-*
+*.exe
+*.o
+*.obj
+*.lst
+build/
