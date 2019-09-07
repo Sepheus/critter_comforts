@@ -5,4 +5,5 @@ public {
     import game.components.animation;
     import game.components.controllable;
     import game.components.velocity;
+    import game.components.audio;
 }
