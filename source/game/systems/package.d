@@ -10,4 +10,5 @@ public {
     import game.systems.collision;
     import game.systems.death;
     import game.systems.food;
+    import game.systems.ui;
 }
