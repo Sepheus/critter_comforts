@@ -10,10 +10,10 @@ class InputSystem : System {
 			auto e = entity.component!Controllable();
             auto v = entity.component!Velocity();
             auto p = entity.component!Position();
-            if(IsKeyPressed(KEY_RIGHT)) { p.startLerp(); v.velocity.x = 32.0f; }
-            else if(IsKeyPressed(KEY_LEFT)) { p.startLerp(); v.velocity.x = -32.0f; }
-            else if(IsKeyPressed(KEY_UP)) { p.startLerp(); v.velocity.y = -32.0f; }
-            else if(IsKeyPressed(KEY_DOWN)) { p.startLerp(); v.velocity.y = 32.0f; }
+            if(IsKeyPressed(KEY_RIGHT) && (p.position.x + 96) <= 640) { p.startLerp(); v.velocity.x = 32.0f; }
+            else if(IsKeyPressed(KEY_LEFT) && (p.position.x - 16.0f) > 0) { p.startLerp(); v.velocity.x = -32.0f; }
+            else if(IsKeyPressed(KEY_UP) && (p.position.y - 16) > 0) { p.startLerp(); v.velocity.y = -32.0f; }
+            else if(IsKeyPressed(KEY_DOWN) && (p.position.y + 96) <= 480) { p.startLerp(); v.velocity.y = 32.0f; }
             else { v.velocity = Vector2Zero(); }
 		}
 	}

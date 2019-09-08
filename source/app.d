@@ -45,17 +45,21 @@ void main() {
 
 void TitleScreen() {
     import std.string : toStringz;
-	Texture2D image, image2;
+	Texture2D image, image2, logo;
 	int frameCount = 0;
 	Vector2 pos = Vector2(0.0f, 0.0f);
 	float scale = 1.0f;
 	float fade = 1.0f;
+	logo = LoadTexture("assets/sprites/Coffee3.png".toStringz);
 	image = LoadTexture("assets/sprites/Mctosh640.png".toStringz);
 	image2 = LoadTexture("assets/sprites/MackHouse640.png".toStringz);
 	while(!IsKeyPressed(KEY_ENTER) && !WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(BLACK);
-		if(GetTime() < 2.0f) { 
+		if(GetTime() < 2.0f) {
+			DrawTextureV(logo, Vector2(0.0f, 70.0f), WHITE);
+		}
+		else if(GetTime() > 2.0f && GetTime() < 4.0f) { 
 			DrawTextureEx(image, pos, 0.0f, scale, WHITE);
 		}
 		else {
@@ -76,6 +80,9 @@ void TitleScreen() {
 			}
 		EndDrawing();
 	}
+	UnloadTexture(logo);
+	UnloadTexture(image);
+	UnloadTexture(image2);
 }
 
 void OakRoom(ref Engine engine) {
@@ -101,6 +108,7 @@ void OakRoom(ref Engine engine) {
 		player.add(new Velocity());
 		player.add(new Collidable());
 		player.add(new Health());
+		player.add(new Points());
 		
 		patron[0].add(new Position(Vector2(0, 200)));
 		patron[0].add(new Velocity(3.0f, 0.0));
@@ -122,7 +130,7 @@ void OakRoom(ref Engine engine) {
 
 		import std.random : uniform;
 		foreach(ref f; food) {
-			f.add(new Position(Vector2(uniform(76.0f, 560.0f), uniform(64.0f, 520.0f))));
+			f.add(new Position(Vector2(uniform(100.0f, 500.0f), uniform(100.0f, 400.0f))));
 			f.add(new Animation("assets/sprites/Food1.png", Vector2(0.0f, 0.0f), 1, Vector2(32.0f, 32.0f)));
 			f.add(new Collidable());
 			f.add(new Pickup());

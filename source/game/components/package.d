@@ -11,4 +11,5 @@ public {
     import game.components.collidable;
     import game.components.health;
     import game.components.pickup;
+    import game.components.points;
 }
