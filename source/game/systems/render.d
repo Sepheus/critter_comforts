@@ -18,7 +18,8 @@ class RenderSystem : System {
 
 		/*foreach(entity; entities.entities!(Collidable)()) {
 			auto p = entity.component!Position();
-			DrawRectangleLinesEx(Rectangle(p.position.x, p.position.y, 64.0f, 64.0f), 1, GREEN);
+			auto c = entity.component!Collidable();
+			DrawRectangleLinesEx(Rectangle(c.hitbox.x,c.hitbox.y, c.hitbox.width, c.hitbox.height), 1, GREEN);
 		}*/
 
 		foreach(entity; entities.entities!(Position, Pickup)()) {

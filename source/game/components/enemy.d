@@ -1,6 +1,6 @@
-module game.components.pathing;
+module game.components.enemy;
 
-class Pathing {
+class Enemy {
     import raylib : Vector2, GetTime;
     import raymath : Vector2Zero;
     Vector2[] positions;

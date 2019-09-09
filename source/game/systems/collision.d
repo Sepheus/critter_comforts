@@ -2,37 +2,38 @@ module game.systems.collision;
 import star.entity : System, EventManager, EntityManager;
 class CollisionSystem : System {
     import raylib : Vector2, GetTime, CheckCollisionRecs, Rectangle;
-	import game.components : Position, Velocity, Collidable, Pathing, Controllable, Health, Pickup;
-	void configure(EventManager events) { }
-	void update(EntityManager entities, EventManager events, double dt) {
-		foreach(entity; entities.entities!(Position, Collidable, Pathing)()) {
-			auto p1 = entity.component!Position();
-            foreach(e; entities.entities!(Position, Collidable, Controllable)()) {
+    import game.components : Position, Velocity, Collidable, Enemy, Controllable, Health, Pickup;
+    void configure(EventManager events) { }
+    void update(EntityManager entities, EventManager events, double dt) {
+        foreach(entity; entities.entities!(Position, Collidable)) {
+            auto p = entity.component!Position();
+            auto h = entity.component!Collidable();
+            h.hitbox.x = p.position.x + h.offset.x;
+            h.hitbox.y = p.position.y + h.offset.y;
+        }
+        foreach(entity; entities.entities!(Collidable, Enemy)()) {
+            auto p1 = entity.component!Collidable();
+            foreach(e; entities.entities!(Collidable, Controllable)()) {
                 if(e.id != entity.id) {
-                    auto p2 = e.component!Position();
+                    auto p2 = e.component!Collidable();
                     auto player = e.component!Health();
-                    if(CheckCollisionRecs(
-                        Rectangle(p1.position.x, p1.position.y, 32.0f, 32.0f), 
-                        Rectangle(p2.position.x, p2.position.y, 32.0f, 32.0f))) {
+                    if(CheckCollisionRecs(p1.hitbox, p2.hitbox)) {
                         if(!player.hit) { player.hit = true; player.health--; }
                     }
                 }
             }
-		}
-        foreach(entity; entities.entities!(Position, Collidable, Pickup)()) {
-			auto p1 = entity.component!Position();
+        }
+        foreach(entity; entities.entities!(Collidable, Pickup)()) {
+            auto p1 = entity.component!Collidable();
             auto obj = entity.component!Pickup();
-            foreach(e; entities.entities!(Position, Collidable, Controllable)()) {
+            foreach(e; entities.entities!(Collidable, Controllable)()) {
                 if(e.id != entity.id) {
-                    auto p2 = e.component!Position();
-                    auto player = e.component!Health();
-                    if(CheckCollisionRecs(
-                        Rectangle(p1.position.x, p1.position.y, 32.0f, 32.0f), 
-                        Rectangle(p2.position.x, p2.position.y, 32.0f, 32.0f))) {
+                    auto p2 = e.component!Collidable();
+                    if(CheckCollisionRecs(p1.hitbox, p2.hitbox)) {
                         if(!obj.taken) { obj.taken = true; }
                     }
                 }
             }
-		}
-	}
+        }
+    }
 }

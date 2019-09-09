@@ -5,12 +5,12 @@ class FoodSystem : System {
     import raylib;
     import std.random : uniform;
     import std.algorithm : clamp;
-    import game.components : Collidable, Pickup, Animation, Position, Pathing, Points;
+    import game.components : Collidable, Pickup, Animation, Position, Enemy, Points;
 	void configure(EventManager events) { }
 	void update(EntityManager entities, EventManager events, double dt) {
         Vector2[] newPos;
         bool scored = false;
-        foreach(entity; entities.entities!(Pathing)()) {
+        foreach(entity; entities.entities!(Enemy)()) {
             auto p = entity.component!Position();
             newPos ~= p.position;
         }

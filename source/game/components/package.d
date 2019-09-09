@@ -6,7 +6,7 @@ public {
     import game.components.controllable;
     import game.components.velocity;
     import game.components.audio;
-    import game.components.pathing;
+    import game.components.enemy;
     import game.components.background;
     import game.components.collidable;
     import game.components.health;
