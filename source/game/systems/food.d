@@ -5,6 +5,7 @@ class FoodSystem : System {
     import raylib;
     import std.random : uniform;
     import std.algorithm : clamp;
+    import game.events : PauseEvent;
     import game.components : Collidable, Pickup, Animation, Position, Enemy, Points;
 	void configure(EventManager events) { }
 	void update(EntityManager entities, EventManager events, double dt) {
@@ -28,7 +29,10 @@ class FoodSystem : System {
             foreach(entity; entities.entities!(Points)()) {
                 auto p = entity.component!Points();
                 p.points += 2;
-                if(p.points > p.max)  { p.points = p.max; }
+                if(p.points > p.max) {
+                    p.points = p.max;
+                    events.emit(PauseEvent(true)); 
+                }
             }
         }
 	}

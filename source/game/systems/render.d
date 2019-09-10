@@ -2,13 +2,13 @@ module game.systems.render;
 import star.entity : System, EntityManager, EventManager;
 import raygui;
 class RenderSystem : System {
-	import game.components : Position, Animation, Background, Pickup, Velocity, Collidable, Points;
+	import game.components;
     import raylib;
 	void configure(EventManager events) { }
 	void update(EntityManager entities, EventManager events, double dt) {
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawFPS(10, 10);
+		//DrawFPS(10, 10);
 
 		foreach(entity; entities.entities!(Position, Background)()) {
 			auto p = entity.component!Position();
@@ -40,6 +40,11 @@ class RenderSystem : System {
 		foreach(entity; entities.entities!(Points)()) {
 			auto score = entity.component!Points();
 			GuiProgressBar(Rectangle(520, 30, 100, 20), "POINTS!", score.points, 0.0f, score.max, false);
+            if(score.points >= score.max) {
+                import std.string : toStringz;
+                DrawText("Winner!!!".toStringz, 140, 180, 100, WHITE);
+                DrawText("Press R to play again", 220, 300, 20, WHITE);
+            }
 		}
 		EndDrawing();
 	}
