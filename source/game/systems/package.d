@@ -10,5 +10,4 @@ public {
     import game.systems.death;
     import game.systems.food;
     import game.systems.ui;
-    import game.systems.scene;
 }

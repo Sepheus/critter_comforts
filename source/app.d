@@ -2,41 +2,22 @@ import raylib;
 import star.entity;
 import game.components;
 import game.systems;
+import level;
 
 void main() {
 	SetConfigFlags(FLAG_VSYNC_HINT);
 	InitWindow(640, 640,"Critter Comforts");
 	SetTargetFPS(60);
 	InitAudioDevice();
-    Camera2D camera;
-
-	auto engine = new Engine();
-	engine.systems.add(new RenderSystem);
-	engine.systems.add(new MovementSystem);
-	engine.systems.add(new AnimationSystem);
-	engine.systems.add(new InputSystem);
-	engine.systems.add(new AudioSystem);
-	engine.systems.add(new CollisionSystem);
-	engine.systems.add(new DeathSystem);
-	engine.systems.add(new FoodSystem);
-	engine.systems.add(new UISystem);
-	engine.systems.add(new SceneSystem);
-	engine.systems.configure();
+	Level level = new Level();
 
 	TitleScreen();
+	level.load();
 	
 	while(!WindowShouldClose()) {
-		engine.systems.update!InputSystem(GetFrameTime());
-		engine.systems.update!SceneSystem(GetFrameTime());
-		engine.systems.update!AnimationSystem(GetFrameTime());
-		engine.systems.update!MovementSystem(GetFrameTime());
-		engine.systems.update!AudioSystem(GetFrameTime());
-		engine.systems.update!CollisionSystem(GetFrameTime());
-		engine.systems.update!DeathSystem(GetFrameTime());
-		engine.systems.update!FoodSystem(GetFrameTime());
-		engine.systems.update!UISystem(GetFrameTime());
-		engine.systems.update!RenderSystem(GetFrameTime());
+		level.update(GetFrameTime());
 	}
+
 	CloseAudioDevice();
 	CloseWindow();
 }

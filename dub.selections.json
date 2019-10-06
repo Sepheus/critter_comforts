@@ -2,6 +2,6 @@
 	"fileVersion": 1,
 	"versions": {
 		"raylib_d": "2.0.7",
-		"star-entity": "1.0.9"
+		"star-entity": "1.1.0"
 	}
 }
